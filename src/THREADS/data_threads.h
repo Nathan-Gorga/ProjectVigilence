@@ -3,9 +3,9 @@
 
 #include "../definitions.h"
 
-void initDataIntakeThread(void);
+void *initDataIntakeThread(void*);
 
-void initDataProcessingThread(void);
+void *initDataProcessingThread(void*);
 
 
 
