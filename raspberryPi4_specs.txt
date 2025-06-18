@@ -1,0 +1,34 @@
+RASPBERRY PI 4 TECH SPECS
+
+1.8GHz clock
+1GB RAM (can be more but for our project we will stick to that)
+
+supports mutlithreading
+
+ARM processor
+
+PROJECT REQUIREMENTS
+
+sampling frequency= 200 Hz
+
+3 channels
+
+channel point type : float
+
+IMPLICATIONS
+
+12 bytes intake per sampling point
+
+* 200 Hz
+
+2400 bytes in 1 second of real time data
+
+having 1GB of RAM, that means we can store 
+
+around 115 hours of real time data in RAM
+
+1 clock cycle of the raspberry pi is 0.55ns
+
+in between each data point, there are 138 643 clock cycles
+
+
