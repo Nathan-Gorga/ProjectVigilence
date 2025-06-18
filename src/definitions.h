@@ -6,6 +6,7 @@
 #include <threads.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #endif
 

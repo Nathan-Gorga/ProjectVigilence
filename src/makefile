@@ -9,7 +9,7 @@ all: main.o
 	clear
 	./ProjectVigilence
 main.o: main.cpp
-	$(CC) $(CFLAGS) -c main.cpp
+	$(CC) $(CFLAGS) -pthread -c main.cpp
 
 clean:
 	rm -f *.o 

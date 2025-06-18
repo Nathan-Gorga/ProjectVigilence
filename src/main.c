@@ -2,6 +2,9 @@
 
 
 int main(void){
+    
+    printf("Hello, World!\n");
+
     //// comments in capital letters refer to particular stages in the architecture diagram
 
     //INIT BOARD
