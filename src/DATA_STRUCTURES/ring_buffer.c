@@ -2,9 +2,8 @@
 
 Ring_Buffer * initRingBuffer(const size_t buffer_size){
 
-    
-    // TODO : calloc instead to prevent undefined behaiviorif index out of bounds
-    Ring_Buffer * temp_buffer = (Ring_Buffer*)malloc(sizeof(Ring_Buffer));
+    Ring_Buffer * temp_buffer = (Ring_Buffer*)calloc(buffer_size, sizeof(Ring_Buffer));
+
 
     temp_buffer->buffer = (float*)malloc(buffer_size * sizeof(float));
 

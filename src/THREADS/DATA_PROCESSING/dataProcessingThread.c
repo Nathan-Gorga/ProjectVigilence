@@ -8,6 +8,9 @@ void *launchDataProcessingThread(void* args){
 
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
 
+    printf(BLUE""TAB"%d\n"RESET,eventRingBuffer->tail);
+
+
     //INIT ALGOS 
  
 

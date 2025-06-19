@@ -7,7 +7,8 @@ void *launchDataIntakeThread(void* args){
     printf(YELLOW""TAB"Launching Data Intake Thread...\n"RESET);
 
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
-    
+
+    printf(YELLOW""TAB"%d\n"RESET,eventRingBuffer->tail);
     //INIT INTERNAL RING BUFFER
     Ring_Buffer * internalRingBuffer = initRingBuffer(INTERNAL_RING_BUFFER_SIZE);
     
