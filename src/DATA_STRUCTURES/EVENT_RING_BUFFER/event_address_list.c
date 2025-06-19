@@ -13,7 +13,7 @@ Node * initNode(void){
     return temp_node;
 }
  
-
+// TODO : only access buffer via node list
 Node * startEventInBuffer(Ring_Buffer * event_buffer, const size_t size, const float channel_data[NUM_CHANNELS]){
     
     Node * event_node = initNode();
@@ -25,6 +25,7 @@ Node * startEventInBuffer(Ring_Buffer * event_buffer, const size_t size, const f
     return event_node;
 }
 
+// TODO : only access buffer via node list
 
 void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size_t size, const float channel_data[NUM_CHANNELS]){
 
