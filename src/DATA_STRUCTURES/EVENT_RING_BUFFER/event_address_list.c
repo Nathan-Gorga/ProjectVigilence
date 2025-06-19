@@ -33,29 +33,29 @@ void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size
     event_node->event_stop = &event_buffer->buffer[(event_buffer->head - 1) % size];
 } 
 
-Node * addNodeToList(Node * head, Node * node){
-    
-    if(head == NULL) return node;
+void addNodeToList(Node * head, Node * node){
+    assert(head != NULL);
 
-    Node * curr = head;
-    
-    while(curr->next != NULL) curr = curr->next;
-    
+    Node * curr = head->next;
+
+    while(curr != NULL){
+        curr = curr->next;
+    }
+
     curr->next = node;
-
-    return head;
 }
 
 
-Node * popHeadNode(Node * head){
+void popNodeFromList(Node * head){
+    assert(head != NULL);
 
-    if(head == NULL) return NULL;
+    if(head->next == NULL) return;
+    
+    Node * temp = head->next->next;
 
-    Node * temp = head->next;
+    freeNode(head->next);
 
-    freeNode(head);
-
-    return temp;
+    head->next = temp;
 }
 
 void freeNode(Node * node){
