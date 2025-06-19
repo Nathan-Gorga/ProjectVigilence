@@ -33,7 +33,6 @@ void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size
     event_node->event_stop = &event_buffer->buffer[(event_buffer->head - 1) % size];
 } 
 
-/// TODO : link nodes to one another
 Node * addNodeToList(Node * head, Node * node){
     
     if(head == NULL) return node;
