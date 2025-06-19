@@ -3,10 +3,11 @@
 
 void *launchDataIntakeThread(void* args){
     
-    printf("Launching Data Intake Thread...\n");
+    printf(YELLOW""TAB"Launching Data Intake Thread...\n"RESET);
 
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
-    printf("%d\n", eventRingBuffer->head);    
+    
+    printf(YELLOW""TAB"%d\n"RESET, eventRingBuffer->head);    
 
 
     {// sending ready signal to master thread
@@ -15,7 +16,7 @@ void *launchDataIntakeThread(void* args){
         ready_count++;
 
         pthread_cond_signal(&cond);
-        printf("Data Intake Thread Ready!\n");
+        printf(YELLOW""TAB"Data Intake Thread Ready!\n"RESET);
 
         pthread_mutex_unlock(&lock);
     }

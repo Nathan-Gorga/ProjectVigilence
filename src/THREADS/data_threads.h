@@ -3,6 +3,8 @@
 
 #include "../definitions.h"
 
+#define TAB "|\t"
+
 extern pthread_mutex_t lock;
 
 extern pthread_cond_t cond;

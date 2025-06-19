@@ -14,7 +14,7 @@ const int THREADS_TO_WAIT = 2;
 
 int main(void){
     
-    printf("Master Thread Launched\n");
+    printf(GREEN"Master Thread Launched\n"RESET);
 
     //INIT BOARD
 
@@ -28,35 +28,33 @@ int main(void){
     //HEARTBEAT TO OPENBCI
 
 
+    //LAUNCH DATA PROCESSING THREAD
+    pthread_t dataProcessingThread;
+    
+    if(pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, eventRingBuffer) != 0){
+        perror(RED"ERROR : unable to create data processing thread\n"RESET);
+        return 1;
+    }
+    
     //LAUNCH DATA INTAKE THREAD
     pthread_t dataIntakeThread;
     
     if(pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, eventRingBuffer) != 0){
-        perror("error while creating data intake thread\n");
+        perror(RED"ERROR : unable to create data intake thread\n"RESET);
         return 1;
     }
     
-    //LAUNCH DATA PROCESSING THREAD
-    pthread_t dataProcessingThread;
+    {//wait for threads to each signal they are ready
+        pthread_mutex_lock(&lock);
+        while (ready_count < THREADS_TO_WAIT) {
+            pthread_cond_wait(&cond, &lock);
+        }
+        printf(GREEN"All threads launched successfully\n"RESET);
+        pthread_mutex_unlock(&lock);
 
-    if(pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, eventRingBuffer) != 0){
-        perror("error while creating data processing thread\n");
-        return 1;
+        pthread_mutex_destroy(&lock);
+        pthread_cond_destroy(&cond);
     }
-
-
-
-    pthread_mutex_lock(&lock);
-    while (ready_count < THREADS_TO_WAIT) {
-        pthread_cond_wait(&cond, &lock);
-    }
-    pthread_mutex_unlock(&lock);
-
-    printf("All threads are ready to go\n");
-
-    pthread_mutex_destroy(&lock);
-    pthread_cond_destroy(&cond);
-
 
     //WAIT FOR DATA PROCESSING TO RESPOND
     pthread_join(dataProcessingThread, NULL);
@@ -72,7 +70,7 @@ int main(void){
     //TERMINATE MASTER THREAD
     freeRingBuffer(eventRingBuffer);
 
-    printf("Mission successful!\n");
+    printf(GREEN"Mission successful!\n"RESET);
 
     return 0;
 }
