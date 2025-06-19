@@ -23,7 +23,15 @@ void freeRingBuffer(Ring_Buffer * ring_buffer);
 
 
 //EVENT ADDRESS LIST (IN RING BUFFER)
+typedef struct address_node{
+    float * event_start;
+    float * event_stop;
+    struct address_node * next;
+}Node;
 
 
+Node * initNode(void);
+
+void freeNode(Node * node);
 
 #endif
