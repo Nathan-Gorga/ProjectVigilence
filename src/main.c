@@ -15,7 +15,7 @@ int main(void){
 
 
     //INIT BUFFERS
-    Ring_Buffer * eventRingBuffer = initRingBuffer(EVENT_RING_BUFFER_SIZE);
+    Ring_Buffer * eventRingBuffer = initEventRingBuffer();
 
     //HEARTBEAT TO OPENBCI
 

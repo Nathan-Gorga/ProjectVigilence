@@ -19,6 +19,8 @@ typedef struct ring_buffer{
 
 Ring_Buffer * initRingBuffer(const size_t buffer_size);
 
+Ring_Buffer * initEventRingBuffer(void);
+
 void freeRingBuffer(Ring_Buffer * ring_buffer);
 
 
