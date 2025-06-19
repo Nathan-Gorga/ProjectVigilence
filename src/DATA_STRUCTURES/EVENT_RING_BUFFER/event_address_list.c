@@ -46,7 +46,17 @@ Node * addNodeToList(Node * head, Node * node){
     return head;
 }
 
-/// TODO :  remove nodes 
+
+Node * popHeadNode(Node * head){
+
+    if(head == NULL) return NULL;
+
+    Node * temp = head->next;
+
+    freeNode(head);
+
+    return temp;
+}
 
 void freeNode(Node * node){
     free(node);
