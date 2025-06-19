@@ -4,10 +4,24 @@
 
 void *launchDataProcessingThread(void* args){
 
-    printf("Data Processing Thread Launched\n");
- 
+    printf("Launching Data Processing Thread...\n");
+
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
 
     printf("%d\n",eventRingBuffer->tail);   
+ 
+
+    {// sending ready signal to master thread
+        pthread_mutex_lock(&lock);
+
+        ready_count++;
+
+        pthread_cond_signal(&cond);
+        printf("Data Processing Thread Ready!\n");
+
+        pthread_mutex_unlock(&lock);
+    }
+
+
     return NULL;
 }
