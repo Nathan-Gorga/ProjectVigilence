@@ -28,6 +28,10 @@ typedef struct address_node{
     struct address_node * next;
 }Node;
 
+typedef struct Packet{
+    Ring_Buffer * event_ring_buffer;
+    Node * head;
+}Packet;
 
 Node * initNode(void);
 

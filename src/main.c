@@ -12,6 +12,9 @@ int ready_count = 0;
 
 const int THREADS_TO_WAIT = 2;
 
+
+
+
 int main(void){
     
     printf(GREEN"Master Thread Launched\n"RESET);
@@ -25,13 +28,20 @@ int main(void){
     //INIT BUFFERS
     Ring_Buffer * eventRingBuffer = initEventRingBuffer();
 
+    Node * head = initNode();
+
+    Packet * packet = (Packet *)malloc(sizeof(Packet));
+
+    packet->event_ring_buffer = eventRingBuffer;
+    packet->head = head;
+
     //HEARTBEAT TO OPENBCI
 
 
     //LAUNCH DATA PROCESSING THREAD
     pthread_t dataProcessingThread;
     
-    if(pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, eventRingBuffer) != 0){
+    if(pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, packet) != 0){
         perror(RED"ERROR : unable to create data processing thread\n"RESET);
         return 1;
     }
@@ -39,7 +49,7 @@ int main(void){
     //LAUNCH DATA INTAKE THREAD
     pthread_t dataIntakeThread;
     
-    if(pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, eventRingBuffer) != 0){
+    if(pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, packet) != 0){
         perror(RED"ERROR : unable to create data intake thread\n"RESET);
         return 1;
     }
@@ -54,6 +64,7 @@ int main(void){
 
         pthread_mutex_destroy(&lock);
         pthread_cond_destroy(&cond);
+        free(packet);
     }
 
     //WAIT FOR DATA PROCESSING TO RESPOND
@@ -69,6 +80,7 @@ int main(void){
 
     //TERMINATE MASTER THREAD
     freeRingBuffer(eventRingBuffer);
+    freeNode(head);
 
     printf(GREEN"Mission successful!\n"RESET);
 

@@ -6,10 +6,11 @@ void *launchDataProcessingThread(void* args){
 
     printf(BLUE""TAB"Launching Data Processing Thread...\n"RESET);
 
-    Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
+    Packet * p = (Packet*)args;
 
-    printf(BLUE""TAB"%d\n"RESET,eventRingBuffer->tail);
-
+    Ring_Buffer * eventRingBuffer = p->event_ring_buffer;
+    Node * head = p->head;
+    
 
     //INIT ALGOS 
  

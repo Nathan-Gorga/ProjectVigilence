@@ -6,6 +6,7 @@
 #include <threads.h>
 #include <string.h>
 #include <unistd.h>
+#include <assert.h>
 #include <pthread.h>
 
 //TEXT COLOR
@@ -17,6 +18,9 @@
 #define MAGENTA  "\x1B[35m"
 #define CYAN  "\x1B[36m"
 #define WHITE  "\x1B[37m"
+
+
+
 
 #endif
 

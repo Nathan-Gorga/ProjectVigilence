@@ -5,10 +5,12 @@
 void *launchDataIntakeThread(void* args){
     
     printf(YELLOW""TAB"Launching Data Intake Thread...\n"RESET);
+    
+    Packet * p = (Packet*)args;
 
-    Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
+    Ring_Buffer * eventRingBuffer = p->event_ring_buffer;
+    Node * head = p->head;
 
-    printf(YELLOW""TAB"%d\n"RESET,eventRingBuffer->tail);
     //INIT INTERNAL RING BUFFER
     Ring_Buffer * internalRingBuffer = initRingBuffer(INTERNAL_RING_BUFFER_SIZE);
     
