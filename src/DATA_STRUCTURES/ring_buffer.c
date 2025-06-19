@@ -12,8 +12,10 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
     return temp_buffer;    
 }
 
-void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, const size_t size){
+void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, const size_t size){ 
 
+    // TODO : signal an error if overwrite occurs
+    
     ring_buffer->buffer[ring_buffer->head] = data;
 
     ring_buffer->head++;
@@ -30,10 +32,9 @@ void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_dat
     }
 }
 
+// TODO : add getDataPoint function
 
-
-
-
+// TODO : add getChannelPoint function
 
 void freeRingBuffer(Ring_Buffer * ring_buffer){
     free(ring_buffer->buffer);

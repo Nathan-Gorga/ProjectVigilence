@@ -9,6 +9,7 @@ Node * initNode(void){
     return temp_node;
 }
 
+// TODO : add linkToEvent function (think about the linking process)
 
 void freeNode(Node * node){
     free(node);
