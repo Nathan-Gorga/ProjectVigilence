@@ -1,6 +1,7 @@
 #include "definitions.h"
 #include "THREADS/data_threads.h"
-#include "DATA_STRUCTURES/data_structures.h"
+#include "DATA_STRUCTURES/EVENT_RING_BUFFER/event_ring_buffer.h"
+#include "DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.h"
 
 int main(void){
     

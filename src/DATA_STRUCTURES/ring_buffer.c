@@ -12,6 +12,29 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
     return temp_buffer;    
 }
 
+void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, const size_t size){
+
+    ring_buffer->buffer[ring_buffer->head] = data;
+
+    ring_buffer->head++;
+
+    // modulo operator is relatively expensive compared to this
+    if(ring_buffer->head >= size) ring_buffer->head = 0;
+    
+}
+
+
+void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size){
+    for(int i = 0; i < NUM_CHANNELS; i++){
+        addChannelPointToRingBuffer(ring_buffer, channel_data[i], size);
+    }
+}
+
+
+
+
+
+
 void freeRingBuffer(Ring_Buffer * ring_buffer){
     free(ring_buffer->buffer);
     free(ring_buffer);

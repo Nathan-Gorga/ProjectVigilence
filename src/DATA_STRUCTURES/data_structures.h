@@ -8,13 +8,6 @@
 
 
 //RING BUFFER 
-#define TIME_STORED_IN_EVENT_RING_BUFFER 60 //seconds
-#define EVENT_RING_BUFFER_SIZE TIME_STORED_IN_EVENT_RING_BUFFER * SAMPLING_FREQ * NUM_CHANNELS
-
-#define TIME_STORED_IN_INTAKE_RING_BUFFER 10 //seconds
-#define INTERNAL_RING_BUFFER_SIZE TIME_STORED_IN_INTAKE_RING_BUFFER * SAMPLING_FREQ * NUM_CHANNELS
-
-
 typedef struct ring_buffer{
     float * buffer;
     unsigned int head;
@@ -23,9 +16,7 @@ typedef struct ring_buffer{
 
 Ring_Buffer * initRingBuffer(const size_t buffer_size);
 
-Ring_Buffer * initEventRingBuffer(void);
-
-Ring_Buffer * initIntakeRingBuffer(void);
+void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size);
 
 void freeRingBuffer(Ring_Buffer * ring_buffer);
 
