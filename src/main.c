@@ -1,5 +1,6 @@
 #include "definitions.h"
 #include "THREADS/data_threads.h"
+#include "DATA_STRUCTURES/data_structures.h"
 
 int main(void){
     
@@ -14,7 +15,7 @@ int main(void){
 
 
     //INIT BUFFERS
-    
+    Ring_Buffer * eventRingBuffer = initRingBuffer(EVENT_RING_BUFFER_SIZE);
 
     //HEARTBEAT TO OPENBCI
 
@@ -22,12 +23,12 @@ int main(void){
     //LAUNCH DATA INTAKE THREAD
     pthread_t dataIntakeThread;
     
-    pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, NULL);
+    pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, eventRingBuffer);
     
     //LAUNCH DATA PROCESSING THREAD
     pthread_t dataProcessingThread;
 
-    pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, NULL);
+    pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, eventRingBuffer);
 
 
     //WAIT FOR DATA PROCESSING TO RESPOND
@@ -42,6 +43,8 @@ int main(void){
     //send ACK signal once the thread responds
 
     //TERMINATE MASTER THREAD
+    freeRingBuffer(eventRingBuffer);
+
     printf("Mission successful!\n");
 
     return 0;
