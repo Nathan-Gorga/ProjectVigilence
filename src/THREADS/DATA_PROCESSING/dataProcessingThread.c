@@ -1,7 +1,9 @@
 #include "../data_threads.h"
 
-void *initDataProcessingThread(void* args){
-    printf("Data Processing Thread(%s) Initiated\n",(char*)args);
+void *launchDataProcessingThread(void* args){
+    if(args == NULL){
+        printf("Data Processing Thread Launched\n");
+    }
 
     return NULL;
 }

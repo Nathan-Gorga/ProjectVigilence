@@ -3,7 +3,7 @@
 
 int main(void){
     
-    printf("Hello, World!\n");
+    printf("Master Thread Launched\n");
 
     //// comments in capital letters refer to particular stages in the architecture diagram
 
@@ -14,13 +14,7 @@ int main(void){
 
 
     //INIT BUFFERS
-
-    const int buffer_size = 10;
-    int * mockBuffer = (int*)malloc(sizeof(int) * buffer_size);
-
-    for(int i = 0; i < buffer_size; i++){
-        mockBuffer[i] = i;
-    }
+    
 
     //HEARTBEAT TO OPENBCI
 
@@ -28,12 +22,12 @@ int main(void){
     //LAUNCH DATA INTAKE THREAD
     pthread_t dataIntakeThread;
     
-    pthread_create(&dataIntakeThread, NULL, initDataIntakeThread, (void*)mockBuffer);
+    pthread_create(&dataIntakeThread, NULL, launchDataIntakeThread, NULL);
     
     //LAUNCH DATA PROCESSING THREAD
     pthread_t dataProcessingThread;
 
-    pthread_create(&dataProcessingThread, NULL, initDataProcessingThread, (void*)"test");
+    pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, NULL);
 
 
     //WAIT FOR DATA PROCESSING TO RESPOND
@@ -50,7 +44,6 @@ int main(void){
     //TERMINATE MASTER THREAD
     printf("Mission successful!\n");
 
-    free(mockBuffer);
     return 0;
 }
 
