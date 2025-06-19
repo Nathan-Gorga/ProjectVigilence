@@ -10,8 +10,8 @@
 //RING BUFFER 
 typedef struct ring_buffer{
     float * buffer;
-    unsigned int head;
-    unsigned int tail;
+    unsigned int head; //head is the the write index
+    unsigned int tail; //tail is the start point of the first node in the list
 } Ring_Buffer;
 
 Ring_Buffer * initRingBuffer(const size_t buffer_size);

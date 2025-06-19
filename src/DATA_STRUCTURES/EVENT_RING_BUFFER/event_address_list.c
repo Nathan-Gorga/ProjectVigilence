@@ -34,6 +34,18 @@ void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size
 } 
 
 /// TODO : link nodes to one another
+Node * addNodeToList(Node * head, Node * node){
+    
+    if(head == NULL) return node;
+
+    Node * curr = head;
+    
+    while(curr->next != NULL) curr = curr->next;
+    
+    curr->next = node;
+
+    return head;
+}
 
 /// TODO :  remove nodes 
 
