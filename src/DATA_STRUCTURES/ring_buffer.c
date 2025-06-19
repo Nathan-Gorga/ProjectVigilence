@@ -27,6 +27,7 @@ void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, co
 
 
 void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size){
+
     for(int i = 0; i < NUM_CHANNELS; i++){
         addChannelPointToRingBuffer(ring_buffer, channel_data[i], size);
     }

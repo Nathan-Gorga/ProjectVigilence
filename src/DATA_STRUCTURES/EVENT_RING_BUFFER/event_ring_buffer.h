@@ -11,4 +11,12 @@
 
 Ring_Buffer * initEventRingBuffer(void);
 
+Node * initNode(void);
+
+Node * startEventInBuffer(Ring_Buffer * event_buffer, const size_t size, const float channel_data[NUM_CHANNELS]);
+
+void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size_t size, const float channel_data[NUM_CHANNELS]);
+
+void freeNode(Node * node);
+
 #endif
