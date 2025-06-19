@@ -8,10 +8,10 @@ void *launchDataProcessingThread(void* args){
 
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
 
-    printf(BLUE""TAB"%d\n"RESET,eventRingBuffer->tail);   
+    //INIT ALGOS 
  
 
-    {// sending ready signal to master thread
+    {// SEND READY SIGNAL TO MASTER
         pthread_mutex_lock(&lock);
 
         ready_count++;
@@ -21,6 +21,29 @@ void *launchDataProcessingThread(void* args){
 
         pthread_mutex_unlock(&lock);
     }
+
+
+    //IS THERE A NODE IN THE LIST?
+
+        // if no : wait for it
+
+        // if yes : take the address in from the first node
+
+        // ARE WE IN CALIBRATION MODE ?
+
+            // if yes : apply calibration algo
+
+                // save data for later use
+
+            // if no : apply algo
+
+
+        // according to the type of detections, trigger relevant responses
+
+        // remove Node from list
+
+        //INTERUPT : TERMINATE THREAD
+
 
 
     return NULL;

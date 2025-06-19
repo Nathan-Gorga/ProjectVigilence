@@ -1,5 +1,6 @@
 #include "../data_threads.h"
 #include "../../DATA_STRUCTURES/data_structures.h"
+#include "../../DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.h"
 
 void *launchDataIntakeThread(void* args){
     
@@ -7,10 +8,10 @@ void *launchDataIntakeThread(void* args){
 
     Ring_Buffer * eventRingBuffer = (Ring_Buffer*)args;
     
-    printf(YELLOW""TAB"%d\n"RESET, eventRingBuffer->head);    
-
-
-    {// sending ready signal to master thread
+    //INIT INTERNAL RING BUFFER
+    Ring_Buffer * internalRingBuffer = initRingBuffer(INTERNAL_RING_BUFFER_SIZE);
+    
+    {// SEND READY SIGNAL TO MASTER
         pthread_mutex_lock(&lock);
 
         ready_count++;
@@ -21,7 +22,24 @@ void *launchDataIntakeThread(void* args){
         pthread_mutex_unlock(&lock);
     }
 
+    //SEND START STREAM SIGNAL TO OPENBCI
 
+
+    //RECEIVE DATA FROM OPENBCI
+
+        //if there is data add it to internal ring
+
+    //SHIFT FROM BASELINE?
+
+        // if yes : add to eventRingBuffer
+
+        // if no : WAS SENDING EVENT ?
+
+            // if yes : CLOSE NODE AND ADD IT TO THE LIST then add to internal buffer
+            
+            // if no : add to internal buffer
+
+    //INTERUPT : TERMINATE THREAD
 
     return NULL;
 }
