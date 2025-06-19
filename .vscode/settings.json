@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "data_threads.h": "c",
-        "data_structures.h": "c"
+        "data_structures.h": "c",
+        "intake_ring_buffer.h": "c"
     }
 }
