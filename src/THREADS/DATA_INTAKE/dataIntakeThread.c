@@ -9,7 +9,11 @@ void * launchDataIntakeThread(void* args){
     
     Node * head = (Node *)args;
 
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
 
     return dataIntakeThread(head);
 }

@@ -21,11 +21,15 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
 
 void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, const size_t size){ 
 
+    #ifdef ASSERT_MODE
+
     assert(ring_buffer != NULL);
 
     assert(ring_buffer->buffer != NULL);
 
     assert(size != 0);
+    
+    #endif
     
     // TODO : signal an error if overwrite occurs
     
@@ -41,6 +45,8 @@ void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, co
 
 void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size){
 
+    #ifdef ASSERT_MODE
+    
     assert(internal_ring_buffer != NULL);
 
     assert(internal_ring_buffer->buffer != NULL);
@@ -51,6 +57,8 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 
     assert(size != 0);
 
+    #endif
+
     for(int i = 0; i < NUM_CHANNELS; i++){
         addChannelPointToRingBuffer(internal_ring_buffer, channel_data[i], size);
     }
@@ -60,7 +68,11 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 
 int getEventFromRingBuffer(Node * head, int * indexes){
 
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
 
     if(head->next == NULL) return 1;//buffer empty
 
@@ -79,8 +91,14 @@ int getEventFromRingBuffer(Node * head, int * indexes){
 
 
 void freeRingBuffer(Ring_Buffer * ring_buffer){
+
+    #ifdef ASSERT_MODE
+
     assert(ring_buffer != NULL);
+    
     assert(ring_buffer->buffer != NULL);
+
+    #endif
 
     free(ring_buffer->buffer);
     free(ring_buffer);

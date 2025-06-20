@@ -26,7 +26,10 @@
 #define WHITE  "\x1B[37m"
 
 
+
+//// UNCOMMENT TO ENABLE
 // #define DEBUG_MODE
+#define ASSERT_MODE
 
 #ifdef DEBUG_MODE
      #define PRINTF_DEBUG do{ \

@@ -2,6 +2,7 @@
 
 
 Node * initNode(void){
+
     Node * temp_node = (Node*)malloc(sizeof(Node));
 
     assert(temp_node != NULL);
@@ -18,7 +19,12 @@ Node * initNode(void){
 
 // TODO : send error message if overwrite in buffer
 void putBufferInRingBuffer(float * buffer, const int sizeBuffer){
+
+    #ifdef ASSERT_MODE
+
     assert(buffer != NULL);
+
+    #endif
 
     bool needsLoop = false; 
     if(event_ring_buffer->head + sizeBuffer >= EVENT_RING_BUFFER_SIZE){
@@ -43,10 +49,14 @@ void putBufferInRingBuffer(float * buffer, const int sizeBuffer){
 
 //internal buffer needs to be a linear buffer
 void createEventNode(Node * event_node, float * internal_buffer, const int sizeInternalBuffer){
+
+    #ifdef ASSERT_MODE
     
     assert(event_node != NULL);
 
     assert(internal_buffer != NULL);
+
+    #endif
 
     event_node->start = event_ring_buffer->head;
 
@@ -57,7 +67,12 @@ void createEventNode(Node * event_node, float * internal_buffer, const int sizeI
 
  
 void addNodeToList(Node * head, Node * node){
+
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
 
     Node * curr = head;
 
@@ -79,7 +94,12 @@ void printNode(Node * node){
 }
 
 void printNodeList(Node * head){
+
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
 
     Node * curr = head->next;
 
@@ -95,7 +115,12 @@ void printNodeList(Node * head){
 }
 
 void popNodeFromList(Node * head){
+
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
 
     if(head->next == NULL) return;
     
@@ -107,13 +132,23 @@ void popNodeFromList(Node * head){
 }
 
 void freeNode(Node * node){
+
+    #ifdef ASSERT_MODE
+
     assert(node != NULL);
+
+    #endif
+
     free(node);
 }
 
 void freeList(Node * head){
 
+    #ifdef ASSERT_MODE
+
     assert(head != NULL);
+
+    #endif
  
     Node * temp = head->next;
  
