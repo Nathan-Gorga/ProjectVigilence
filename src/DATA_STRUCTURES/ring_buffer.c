@@ -57,6 +57,7 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 
     #endif
 
+    
     for(int i = 0; i < NUM_CHANNELS; i++){
         addChannelPointToRingBuffer(internal_ring_buffer, channel_data[i], size);
     }
@@ -64,23 +65,28 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 
 
 
-int getEventFromRingBuffer(Node * head, int * indexes){
+int takeEventFromRingBuffer(Node * head, int * indexes){
+
 
     #ifdef ASSERT_MODE
 
     assert(head != NULL);
 
     #endif
+    PRINTF_DEBUG
 
     if(head->next == NULL) return 1;//buffer empty
+    PRINTF_DEBUG
 
     Node *eventNode = head->next;
+    PRINTF_DEBUG
     
     indexes[0] = eventNode->start;
     indexes[1] = eventNode->stop;
+    PRINTF_DEBUG
 
     popNodeFromList(head);
-
+    PRINTF_DEBUG
     return 0; //proper execution
 }
 

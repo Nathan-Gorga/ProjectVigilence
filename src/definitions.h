@@ -35,10 +35,7 @@
 
 
 #ifdef DEBUG_MODE
-     #define PRINTF_DEBUG do{ \
-                              printf(MAGENTA""TAB"DEBUG : %s:%d : %s\n"RESET, __FILE__, __LINE__, __func__); \
-                              fflush(stdout); \
-                         }while(0);
+     #define PRINTF_DEBUG do{ printf( MAGENTA "DEBUG : %s:%d : %s\n" RESET , __FILE__ , __LINE__ , __func__ );  fflush( stdout ); }while(0); 
 #else
      #define PRINTF_DEBUG
 #endif

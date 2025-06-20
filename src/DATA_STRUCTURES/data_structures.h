@@ -17,4 +17,6 @@ void freeNode(Node * node);
 
 void freeList(Node * head);
 
+int takeEventFromRingBuffer(Node * head, int * indexes);
+
 #endif

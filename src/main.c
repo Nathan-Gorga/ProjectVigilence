@@ -45,12 +45,14 @@ int main(void){
 
 
     //LAUNCH DATA PROCESSING THREAD
+    PRINTF_DEBUG
     pthread_t dataProcessingThread;
     
     if(pthread_create(&dataProcessingThread, NULL, launchDataProcessingThread, head) != 0){
         perror(RED"ERROR : unable to create data processing thread\n"RESET);
         return 1;
     }
+    PRINTF_DEBUG
     
     //LAUNCH DATA INTAKE THREAD
     pthread_t dataIntakeThread;
@@ -59,6 +61,7 @@ int main(void){
         perror(RED"ERROR : unable to create data intake thread\n"RESET);
         return 1;
     }
+    PRINTF_DEBUG
     
     {//wait for threads to each signal they are ready
         pthread_mutex_lock(&lock);
@@ -72,9 +75,11 @@ int main(void){
         pthread_cond_destroy(&cond);
         
     }
+    PRINTF_DEBUG
 
     //WAIT FOR DATA PROCESSING TO RESPOND
     pthread_join(dataProcessingThread, NULL);
+    PRINTF_DEBUG
 
     //send ACK signal once the thread responds
 
@@ -83,11 +88,12 @@ int main(void){
 
     //send ACK signal once the thread responds
 
+    PRINTF_DEBUG
 
     //TERMINATE MASTER THREAD
     freeList(head);
     freeRingBuffer(event_ring_buffer);
-    printf(GREEN"NO SEGFAULTS ?!?!?!\n"RESET);
+    printf(GREEN"NO SEGFAULTS ?!\n"RESET);
 
     return 0;
 }

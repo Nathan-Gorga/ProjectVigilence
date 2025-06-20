@@ -14,7 +14,7 @@ void * launchDataIntakeThread(void* args){
     assert(head != NULL);
 
     #endif
-
+    PRINTF_DEBUG
     return dataIntakeThread(head);
 }
 
@@ -51,6 +51,7 @@ void * dataIntakeThread(Node* head){
         PRINTF_DEBUG
 
         //RECEIVE DATA FROM OPENBCI
+        //FIXME : make it work for any number of channels
         mockSignal(signal_channel1, size, 1, 10);    
         mockSignal(signal_channel2, size, 1.5, 15);    
 
@@ -92,5 +93,6 @@ void * dataIntakeThread(Node* head){
         //INTERUPT : TERMINATE THREAD
         
         free(signal);
+        PRINTF_DEBUG
         return NULL;
 }

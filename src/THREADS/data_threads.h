@@ -20,6 +20,6 @@ void *launchDataProcessingThread(void*);
 
 void * dataIntakeThread(Node* head);
 
-
+void * dataProcessingThread(Node * head);
 #endif
 

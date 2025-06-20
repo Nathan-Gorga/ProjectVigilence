@@ -34,7 +34,7 @@ void putBufferInRingBuffer(float * buffer, const int sizeBuffer){
 
     if(!needsLoop){
 
-        if(event_ring_buffer->head + sizeBuffer > event_ring_buffer->tail){
+        if(event_ring_buffer->head < event_ring_buffer->tail && event_ring_buffer->head + sizeBuffer > event_ring_buffer->tail){
             perror(RED"ERROR : buffer overflow\n"RESET);
             return;
         }
@@ -136,15 +136,32 @@ void popNodeFromList(Node * head){
 
     #endif
 
+    PRINTF_DEBUG
+
     if(head->next == NULL) return;
+
+    PRINTF_DEBUG
     
-    Node * temp = head->next->next;
+    Node * temp = head->next->next; 
+        
+    PRINTF_DEBUG
 
     freeNode(head->next);
 
+    PRINTF_DEBUG
+
     head->next = temp;
 
+    PRINTF_DEBUG
+
+    if(temp == NULL){
+        event_ring_buffer->tail = event_ring_buffer->head;
+        return;
+    }
+
     event_ring_buffer->tail = head->next->start;
+
+    PRINTF_DEBUG
 
 }
 
