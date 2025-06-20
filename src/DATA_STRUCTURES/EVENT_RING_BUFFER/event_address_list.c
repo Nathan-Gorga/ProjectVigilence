@@ -17,7 +17,6 @@ Node * initNode(void){
 }
 
 
-// TODO : send error message if overwrite in buffer
 void putBufferInRingBuffer(float * buffer, const int sizeBuffer){
 
     #ifdef ASSERT_MODE

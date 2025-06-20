@@ -9,7 +9,7 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
     temp_buffer->buffer = (float*)malloc(buffer_size * sizeof(float));
 
     if(temp_buffer->buffer == NULL){
-        free(temp_buffer); // FIXME : may cause double free
+        free(temp_buffer); 
         return NULL;
     }
     temp_buffer->head = 0;
@@ -30,8 +30,6 @@ void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, co
     assert(size != 0);
     
     #endif
-
-    // TODO : signal an error if overwrite occurs
     
     ring_buffer->buffer[ring_buffer->head] = data;
 
