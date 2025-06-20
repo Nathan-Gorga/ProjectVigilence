@@ -11,11 +11,8 @@ void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_dat
 
 void freeRingBuffer(Ring_Buffer * ring_buffer);
 
-
-
 Node * initNode(void);
 
 void freeNode(Node * node);
-
 
 #endif
