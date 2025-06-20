@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-Wall -Wextra -Werror -pedantic
+CFLAGS=#-Wall -Wextra -Werror -pedantic
 
 all: main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o
 	$(CC) $(CFLAGS) main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o -o ProjectVigilence

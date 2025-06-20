@@ -7,6 +7,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <assert.h>
+#include <stdbool.h>
 #include <pthread.h>
 
 //TEXT COLOR

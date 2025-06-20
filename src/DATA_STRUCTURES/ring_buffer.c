@@ -13,9 +13,15 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
     return temp_buffer;    
 }
 
-// TODO : only access buffer via node list
+
 void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, const size_t size){ 
 
+    assert(ring_buffer != NULL);
+
+    assert(ring_buffer->buffer != NULL);
+
+    assert(size != 0);
+    
     // TODO : signal an error if overwrite occurs
     
     ring_buffer->buffer[ring_buffer->head] = data;
@@ -27,13 +33,32 @@ void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, co
     
 }
 
-// TODO : only access buffer via node list
-void addDataPointToRingBuffer(Ring_Buffer * ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size){
+
+void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float channel_data[NUM_CHANNELS], const size_t size){
+
+    assert(internal_ring_buffer != NULL);
+
+    assert(internal_ring_buffer->buffer != NULL);
+
+    assert(internal_ring_buffer->buffer != event_ring_buffer->buffer); 
+
+    assert(channel_data != NULL);
+
+    assert(size != 0);
 
     for(int i = 0; i < NUM_CHANNELS; i++){
-        addChannelPointToRingBuffer(ring_buffer, channel_data[i], size);
+        addChannelPointToRingBuffer(internal_ring_buffer, channel_data[i], size);
     }
 }
+
+
+
+
+
+
+
+
+
 
 // TODO : only access buffer via node list
 // TODO : add getDataPoint function 
