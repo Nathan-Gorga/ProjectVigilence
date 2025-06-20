@@ -8,7 +8,8 @@ void *launchDataProcessingThread(void* args){
 
     Node * head = (Node*)args;
     
-
+    assert(head != NULL);
+    
     //INIT ALGOS 
  
 

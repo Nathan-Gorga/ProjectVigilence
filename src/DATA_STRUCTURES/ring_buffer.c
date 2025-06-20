@@ -4,9 +4,14 @@ Ring_Buffer * initRingBuffer(const size_t buffer_size){
 
     Ring_Buffer * temp_buffer = (Ring_Buffer*)calloc(buffer_size, sizeof(Ring_Buffer));
 
+    if(temp_buffer == NULL) return NULL;
 
     temp_buffer->buffer = (float*)malloc(buffer_size * sizeof(float));
 
+    if(temp_buffer->buffer == NULL){
+        free(temp_buffer); // FIXME : may cause double free
+        return NULL;
+    }
     temp_buffer->head = 0;
     temp_buffer->tail = 0;
 
@@ -67,6 +72,9 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 // TODO : add getChannelPoint function
 
 void freeRingBuffer(Ring_Buffer * ring_buffer){
+    assert(ring_buffer != NULL);
+    assert(ring_buffer->buffer != NULL);
+
     free(ring_buffer->buffer);
     free(ring_buffer);
 }

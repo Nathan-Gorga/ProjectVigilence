@@ -8,8 +8,15 @@ void *launchDataIntakeThread(void* args){
     
     Node * head = (Node *)args;
 
+    assert(head != NULL);
+
     //INIT INTERNAL RING BUFFER
     Ring_Buffer * internalRingBuffer = initRingBuffer(INTERNAL_RING_BUFFER_SIZE);
+    
+    if(internalRingBuffer == NULL){
+        perror(RED"ERROR : unable to create internal ring buffer\n"RESET);
+        return NULL;
+    }
     
     {// SEND READY SIGNAL TO MASTER
         pthread_mutex_lock(&lock);

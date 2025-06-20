@@ -29,9 +29,17 @@ int main(void){
 
     //defined in data_structures.h
     event_ring_buffer = initEventRingBuffer();
+    if(event_ring_buffer == NULL){
+        perror(RED"ERROR : unable to create event ring buffer\n"RESET);
+        return 1;
+    }
+
 
     Node * head = initNode();
-
+    if(head == NULL){
+        perror(RED"ERROR : unable to create event address list\n"RESET);
+        return 1;
+    }
 
     //HEARTBEAT TO OPENBCI
 
@@ -78,7 +86,7 @@ int main(void){
 
     //TERMINATE MASTER THREAD
     freeNode(head);
-
+    freeRingBuffer(event_ring_buffer);
     printf(GREEN"Mission successful!\n"RESET);
 
     return 0;

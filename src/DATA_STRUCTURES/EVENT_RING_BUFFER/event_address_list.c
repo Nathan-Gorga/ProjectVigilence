@@ -4,6 +4,8 @@
 Node * initNode(void){
     Node * temp_node = (Node*)malloc(sizeof(Node));
 
+    assert(temp_node != NULL);
+
     temp_node->start = -1;
 
     temp_node->stop = -1;
@@ -81,5 +83,6 @@ void popNodeFromList(Node * head){
 }
 
 void freeNode(Node * node){
+    assert(node != NULL);
     free(node);
 }
