@@ -59,16 +59,36 @@ void createEventNode(Node * event_node, float * internal_buffer, const int sizeI
 void addNodeToList(Node * head, Node * node){
     assert(head != NULL);
 
-    Node * curr = head->next;
+    Node * curr = head;
 
-    while(curr != NULL){
+    while(curr->next != NULL){
         curr = curr->next;
     }
 
     curr->next = node;
 }
+void printNode(Node * node){
+    
+    if(node != NULL){
+        printf("NULL\n");
+        return;
+    } 
 
+    printf("%p -> ",(void *)node);
+}
 
+void printNodeList(Node * head){
+    assert(head != NULL);
+
+    Node * curr = head->next;
+
+    while(curr != NULL){
+        printNode(curr);
+        curr = curr->next;
+    }
+
+    printNode(NULL);
+}
 
 void popNodeFromList(Node * head){
     assert(head != NULL);
@@ -85,4 +105,22 @@ void popNodeFromList(Node * head){
 void freeNode(Node * node){
     assert(node != NULL);
     free(node);
+}
+
+void freeList(Node * head){
+
+    assert(head != NULL);
+ 
+    Node * temp = head->next;
+ 
+    while(temp != NULL){
+ 
+        Node * next = temp->next;
+ 
+        freeNode(temp);
+ 
+        temp = next;
+    }
+
+    free(head);
 }

@@ -1,8 +1,8 @@
 CC=clang
 CFLAGS=#-Wall -Wextra -Werror -pedantic
 
-all: main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o
-	$(CC) $(CFLAGS) main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o -o ProjectVigilence
+all: main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o mock_signal.o
+	$(CC) $(CFLAGS) main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o mock_signal.o -lm -o ProjectVigilence
 	make clean 
 	clear
 	./ProjectVigilence
@@ -28,6 +28,9 @@ event_ring_buffer.o: DATA_STRUCTURES/EVENT_RING_BUFFER/event_ring_buffer.c
 
 intake_ring_buffer.o: DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.c
 	$(CC) $(CFLAGS) -c DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.c -o intake_ring_buffer.o
+
+mock_signal.o: THREADS/DATA_INTAKE/mockSignal.c
+	$(CC) $(CFLAGS) -c THREADS/DATA_INTAKE/mockSignal.c -o mock_signal.o
 
 
 clean:

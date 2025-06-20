@@ -85,7 +85,7 @@ int main(void){
 
 
     //TERMINATE MASTER THREAD
-    freeNode(head);
+    freeList(head);
     freeRingBuffer(event_ring_buffer);
     printf(GREEN"Mission successful!\n"RESET);
 

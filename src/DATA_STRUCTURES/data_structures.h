@@ -15,4 +15,6 @@ Node * initNode(void);
 
 void freeNode(Node * node);
 
+void freeList(Node * head);
+
 #endif

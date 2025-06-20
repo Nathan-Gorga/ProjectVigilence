@@ -1,12 +1,12 @@
 #include "mockSignal.h"
 
-void mockSignal(double * signal, const size_t size){
+void mockSignal(float * signal, const size_t size, const float amplitude, const float frequency){
     
-    double t;
+    float t;
 
     for (int i = 0; i < size; i++) {
         t = i / SAMPLING_FREQ;
-        double sine_value = SIGNAL_AMPLITUDE * sin(2 * PI * SIGNAL_FREQUENCY * t);
+        float sine_value = amplitude * sin(2 * PI * frequency * t);
         signal[i] = sine_value;
     }
 

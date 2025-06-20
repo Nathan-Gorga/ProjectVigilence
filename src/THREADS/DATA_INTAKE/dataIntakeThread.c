@@ -23,6 +23,8 @@ void * dataIntakeThread(Node* head){
             return NULL;
         }
         
+        PRINTF_DEBUG
+
         {// SEND READY SIGNAL TO MASTER
             pthread_mutex_lock(&lock);
     
@@ -34,15 +36,48 @@ void * dataIntakeThread(Node* head){
             pthread_mutex_unlock(&lock);
         }
     
+        PRINTF_DEBUG
+
         //SEND START STREAM SIGNAL TO OPENBCI
         const size_t size = (int)(SAMPLING_FREQ * SIGNAL_DURATION);
-        double * signal = (double*)calloc(size, sizeof(double));
-    
-        //RECEIVE DATA FROM OPENBCI
-        mockSignal(signal, size);
 
-            //if there is data add it to internal ring
+        float * signal_channel1 = (float*)calloc(size, sizeof(float));
+        float * signal_channel2 = (float*)calloc(size, sizeof(float));
     
+        PRINTF_DEBUG
+
+        //RECEIVE DATA FROM OPENBCI
+        mockSignal(signal_channel1, size, 1, 10);    
+        mockSignal(signal_channel2, size, 1.5, 15);    
+
+        PRINTF_DEBUG
+
+        float * signal = (float*)calloc(size * NUM_CHANNELS, sizeof(float));
+
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < NUM_CHANNELS; j++){
+                signal[(j * NUM_CHANNELS) + i] = j == 0 ? signal_channel1[i] : signal_channel2[i];
+            }
+        }
+
+        PRINTF_DEBUG
+
+        Node * event_node = initNode();
+
+        createEventNode(event_node, signal, size * NUM_CHANNELS);
+
+        PRINTF_DEBUG
+        //ADD NODE TO THE LIST
+        addNodeToList(head, event_node);
+
+        PRINTF_DEBUG
+
+        printf(YELLOW""TAB);
+        printNodeList(head);
+        printf(RESET);
+        
+            //if there is data add it to internal ring
+        
         //SHIFT FROM BASELINE?
     
             // if yes : add to eventRingBuffer

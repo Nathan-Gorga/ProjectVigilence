@@ -24,4 +24,6 @@ void popNodeFromList(Node * head);
 
 void freeNode(Node * node);
 
+void printNodeList(Node * head);
+
 #endif

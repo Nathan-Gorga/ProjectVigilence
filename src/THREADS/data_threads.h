@@ -2,6 +2,7 @@
 #define DATA_THREADS_H
 
 #include "../definitions.h"
+#include "../DATA_STRUCTURES/node.h"
 
 #define TAB "|\t"
 
@@ -17,7 +18,7 @@ void *launchDataIntakeThread(void*);
 
 void *launchDataProcessingThread(void*);
 
-
+void * dataIntakeThread(Node* head);
 
 
 #endif
