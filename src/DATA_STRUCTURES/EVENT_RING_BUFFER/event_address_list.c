@@ -66,15 +66,16 @@ void addNodeToList(Node * head, Node * node){
     }
 
     curr->next = node;
+
 }
 void printNode(Node * node){
     
-    if(node != NULL){
+    if(node == NULL){
         printf("NULL\n");
         return;
     } 
 
-    printf("%p -> ",(void *)node);
+    printf("%p -> ",node);
 }
 
 void printNodeList(Node * head){
@@ -82,12 +83,15 @@ void printNodeList(Node * head){
 
     Node * curr = head->next;
 
+    printf("HEAD -> ");
+
     while(curr != NULL){
         printNode(curr);
         curr = curr->next;
     }
 
     printNode(NULL);
+
 }
 
 void popNodeFromList(Node * head){
