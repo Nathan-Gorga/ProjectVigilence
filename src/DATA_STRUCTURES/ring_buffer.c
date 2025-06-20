@@ -30,7 +30,7 @@ void addChannelPointToRingBuffer(Ring_Buffer * ring_buffer, const float data, co
     assert(size != 0);
     
     #endif
-    
+
     // TODO : signal an error if overwrite occurs
     
     ring_buffer->buffer[ring_buffer->head] = data;
@@ -82,8 +82,6 @@ int getEventFromRingBuffer(Node * head, int * indexes){
     indexes[1] = eventNode->stop;
 
     popNodeFromList(head);
-
-    event_ring_buffer->tail = head->next->start;
 
     return 0; //proper execution
 }

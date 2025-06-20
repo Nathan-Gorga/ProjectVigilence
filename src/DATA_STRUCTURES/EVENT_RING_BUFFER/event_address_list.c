@@ -27,18 +27,33 @@ void putBufferInRingBuffer(float * buffer, const int sizeBuffer){
     #endif
 
     bool needsLoop = false; 
+
     if(event_ring_buffer->head + sizeBuffer >= EVENT_RING_BUFFER_SIZE){
+
         needsLoop = true;
     }
 
     if(!needsLoop){
+
+        if(event_ring_buffer->head + sizeBuffer > event_ring_buffer->tail){
+            perror(RED"ERROR : buffer overflow\n"RESET);
+            return;
+        }
+
         memcpy(event_ring_buffer->buffer + event_ring_buffer->head, buffer, sizeBuffer * sizeof(float));
+
         event_ring_buffer->head += sizeBuffer;
+
         return;
     }
 
     const int sizeFirstMemCPY = EVENT_RING_BUFFER_SIZE - event_ring_buffer->head;
     const int sizeSecondMemCPY = sizeBuffer - sizeFirstMemCPY;
+
+    if(sizeSecondMemCPY > event_ring_buffer->tail){
+        perror(RED"ERROR : buffer overflow\n"RESET);
+        return;
+    }
 
     memcpy(event_ring_buffer->buffer + event_ring_buffer->head, buffer, sizeFirstMemCPY * sizeof(float));
     memcpy(event_ring_buffer->buffer, buffer + sizeFirstMemCPY, sizeSecondMemCPY * sizeof(float));
@@ -129,6 +144,9 @@ void popNodeFromList(Node * head){
     freeNode(head->next);
 
     head->next = temp;
+
+    event_ring_buffer->tail = head->next->start;
+
 }
 
 void freeNode(Node * node){

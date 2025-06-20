@@ -11,7 +11,6 @@
 #include <pthread.h>
 
 
-
 #define NUM_CHANNELS 2
 #define SAMPLING_FREQ 200
 
@@ -30,6 +29,10 @@
 //// UNCOMMENT TO ENABLE
 // #define DEBUG_MODE
 #define ASSERT_MODE
+
+
+
+
 
 #ifdef DEBUG_MODE
      #define PRINTF_DEBUG do{ \

@@ -76,9 +76,6 @@ void * dataIntakeThread(Node* head){
 
         PRINTF_DEBUG
 
-        printf(YELLOW""TAB);
-        printNodeList(head);
-        printf(RESET);
         
             //if there is data add it to internal ring
         
