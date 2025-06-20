@@ -3,9 +3,10 @@
 
 
 #include "../../definitions.h"
-#include "../data_structures.h"
+#include "../node.h"
+#include "../ringbuffer.h"
 
-#define TIME_STORED_IN_EVENT_RING_BUFFER 60 //seconds
+#define TIME_STORED_IN_EVENT_RING_BUFFER 60
 #define EVENT_RING_BUFFER_SIZE TIME_STORED_IN_EVENT_RING_BUFFER * SAMPLING_FREQ * NUM_CHANNELS
 
 
@@ -13,9 +14,11 @@ Ring_Buffer * initEventRingBuffer(void);
 
 Node * initNode(void);
 
-Node * startEventInBuffer(Ring_Buffer * event_buffer, const size_t size, const float channel_data[NUM_CHANNELS]);
+void putBufferInRingBuffer(float * buffer, const int sizeBuffer);
 
-void stopEventInBuffer(Ring_Buffer * event_buffer, Node * event_node, const size_t size, const float channel_data[NUM_CHANNELS]);
+void createEventNode(Node * event_node, float * internal_buffer, const int sizeInternalBuffer);
+
+void addNodeToList(Node * head, Node * node);
 
 void popNodeFromList(Node * head);
 

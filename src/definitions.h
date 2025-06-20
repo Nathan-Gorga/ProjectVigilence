@@ -10,6 +10,10 @@
 #include <stdbool.h>
 #include <pthread.h>
 
+
+#define NUM_CHANNELS 2
+#define SAMPLING_FREQ 200
+
 //TEXT COLOR
 #define RESET  "\x1B[0m"
 #define RED  "\x1B[31m"
