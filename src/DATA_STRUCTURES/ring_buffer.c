@@ -58,18 +58,25 @@ void addDataPointToRingBuffer(Ring_Buffer * internal_ring_buffer, const float ch
 
 
 
+int getEventFromRingBuffer(Node * head, int * indexes){
+
+    assert(head != NULL);
+
+    if(head->next == NULL) return 1;//buffer empty
+
+    Node *eventNode = head->next;
+    
+    indexes[0] = eventNode->start;
+    indexes[1] = eventNode->stop;
+
+    popNodeFromList(head);
+
+    event_ring_buffer->tail = head->next->start;
+
+    return 0; //proper execution
+}
 
 
-
-
-
-
-
-// TODO : only access buffer via node list
-// TODO : add getDataPoint function 
-
-// TODO : only access buffer via node list
-// TODO : add getChannelPoint function
 
 void freeRingBuffer(Ring_Buffer * ring_buffer){
     assert(ring_buffer != NULL);

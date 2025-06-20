@@ -2,6 +2,7 @@
 #define DATA_STRUCTURES_H
 
 #include "../definitions.h"
+#include "./EVENT_RING_BUFFER/event_ring_buffer.h"
 
 #define NUM_CHANNELS 2
 #define SAMPLING_FREQ 200
