@@ -32,6 +32,8 @@ int main(void){// TODO : modifier le rapport pour pas que ça soit arduino et en
         return 1;
     }
 
+    // assert(UART_fd[UART_RX] > 0 && UART_fd[UART_TX] > 0);
+
     //INIT BUFFERS
 
     

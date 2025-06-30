@@ -16,7 +16,11 @@ void * fakeOpenBCI(void){
 
     #define SIGNAL_BUF_SIZE 20
     
+<<<<<<< HEAD
     float signalBuffer[SIGNAL_BUF_SIZE] = {0.0f};
+=======
+    float signalBuffer[ten_sec_data] = {0.0f};
+>>>>>>> f05b5bc (improved the fakeOpenBCI loop)
     int count = 200;
 
     //TODO : wait for data intake signal to start
@@ -24,7 +28,11 @@ void * fakeOpenBCI(void){
 
     while(count--){//TODO : add a better stop condition
 
+<<<<<<< HEAD
         const int startEvent = randomStartEvent(SIGNAL_BUF_SIZE)+1;
+=======
+        const int startEvent = randomStartEvent(ten_sec_data);
+>>>>>>> f05b5bc (improved the fakeOpenBCI loop)
 
         PRINTF_DEBUG
         sendUART(signalBuffer, startEvent);//FIXME : if no read is performed on the pipe, the thread freezes, handle this
