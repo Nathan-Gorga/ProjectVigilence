@@ -2,6 +2,7 @@
 #include "THREADS/data_threads.h"
 #include "DATA_STRUCTURES/EVENT_RING_BUFFER/event_ring_buffer.h"
 #include "DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.h"
+#include "UART/UART.h"
 
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;

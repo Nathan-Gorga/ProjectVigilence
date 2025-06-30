@@ -101,8 +101,7 @@ void * dataIntakeThread(Node* head){
         //INTERUPT : TERMINATE THREAD
         
         free(signal);
-        free(internalRingBuffer->buffer);
-        free(internalRingBuffer);
+        freeRingBuffer(internalRingBuffer);
         PRINTF_DEBUG
         return NULL;
 }
