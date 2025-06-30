@@ -16,9 +16,9 @@ int initUART(void);
 
 void closeUART(void);
 
-int sendByteUART(const byte data);
+int sendUART(const byte const * data, const size_t size);
 
-int getByteUART(const byte * data, const size_t size);
+int getUART(const byte * data, const size_t size);
 
 #endif
 

@@ -11,12 +11,27 @@ void closeUART(void){
 }
 
 
+int sendUART(const byte const * data, const size_t size){
 
-int sendByteUART(const byte data){
-    return write(UART_fd[UART_TX], data, sizeof(byte));
+    #ifdef ASSERT_MODE
+
+    assert(data != NULL);
+
+    assert(size > 0);
+
+    #endif
+
+    return write(UART_fd[UART_TX], data, sizeof(byte) * size);
 }
 
-int getByteUART(const byte * data, const size_t size){
+int getUART(const byte * data, const size_t size){
+    
+    #ifdef ASSERT_MODE
+
+    assert(size > 0);
+
+    #endif
+
     return read(UART_fd[UART_RX], data, sizeof(byte) * size);
 }
 
