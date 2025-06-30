@@ -1,7 +1,7 @@
 #include "UART.h"
 
-void initUART(void){
-    pipe(UART_fd);
+int initUART(void){
+    return pipe(UART_fd);
 }
 
 
@@ -16,7 +16,7 @@ int sendByteUART(const byte data){
     return write(UART_fd[UART_TX], data, sizeof(byte));
 }
 
-int getByteUART(byte * data, const size_t size){
+int getByteUART(const byte * data, const size_t size){
     return read(UART_fd[UART_RX], data, sizeof(byte) * size);
 }
 

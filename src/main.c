@@ -24,7 +24,10 @@ int main(void){
 
 
     //INIT UART
-    initUART();
+    if(initUART() == -1){
+        perror(RED"ERROR : unable to initialize UART\n"RESET);
+        return 1;
+    }
 
     //INIT BUFFERS
 

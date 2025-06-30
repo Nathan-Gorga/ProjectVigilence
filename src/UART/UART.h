@@ -12,13 +12,13 @@
 
 int UART_fd[2];
 
-void initUART(void);
+int initUART(void);
 
 void closeUART(void);
 
 int sendByteUART(const byte data);
 
-int getByteUART(byte * data, const size_t size);
+int getByteUART(const byte * data, const size_t size);
 
 #endif
 
