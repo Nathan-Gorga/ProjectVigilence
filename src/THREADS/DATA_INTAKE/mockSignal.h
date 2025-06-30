@@ -12,5 +12,5 @@
 
 void mockSignal(float * signal, const size_t size, const float amplitude, const float frequency);
 
-void mockEvent(float * signal);
+size_t mockEvent(float * signal);
 #endif

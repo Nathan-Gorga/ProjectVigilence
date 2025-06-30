@@ -16,11 +16,12 @@ void mockSignal(float * signal, const size_t size, const float amplitude, const 
 
 
 
-void mockEvent(float * signal){
+size_t mockEvent(float * signal){
     const float frequency = 6.0f;
     const float amplitude = 1.0f; 
-    const size_t size = 150;
+    const size_t size = 100;
 
     mockSignal(signal, size, amplitude, frequency);
+    return size;
 }
 
