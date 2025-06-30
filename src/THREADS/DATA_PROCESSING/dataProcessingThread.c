@@ -52,7 +52,7 @@ void * dataProcessingThread(Node * head){
     PRINTF_DEBUG
 
 
-    //FIXME : make it work for any number of channel
+    
     const int start = indexes[0];
     const int stop = indexes[1];
     
@@ -89,29 +89,37 @@ void * dataProcessingThread(Node * head){
     }
     PRINTF_DEBUG
 
-    //FIXME : make it work for any number of channels
+    
 
     const int channelSize = size / NUM_CHANNELS;
 
-    float * channel1 = (float*)calloc(channelSize, sizeof(float));
-    float * channel2 = (float*)calloc(channelSize, sizeof(float));
-    
-    for(int i = 0; i < channelSize; i++){
-        channel1[i] = eventSignal[i * NUM_CHANNELS];
-        channel2[i] = eventSignal[i * NUM_CHANNELS + 1];
+    float *signal_channels[NUM_CHANNELS];
+    for(int i = 0; i < NUM_CHANNELS; i++){
+        signal_channels[i] = (float*)calloc(size, sizeof(float));
     }
+    
+ 
+    for(int i = 0; i < NUM_CHANNELS; i++){
+        for(int j = 0; j < channelSize; j++){
+            signal_channels[i][j] = eventSignal[j * NUM_CHANNELS + i];
+        }
+    }
+
     PRINTF_DEBUG
     
     free(eventSignal);
-    
-    // for(int i = 0; i < channelSize; i++){
-    //     printf("Channel 1 : %f\n", channel1[i]);
-    //     printf("Channel 2 : %f\n", channel2[i]);
+
+    // for(int i = 0; i < NUM_CHANNELS; i++){
+    //     for(int j = 0; j < channelSize; j++){
+    //         printf(""TAB"Channel %d : %f\n", i, signal_channels[i][j]);
+    //     }
     // }
     PRINTF_DEBUG
     
-    free(channel1);
-    free(channel2);
+    for(int i = 0; i < NUM_CHANNELS; i++){
+        free(signal_channels[i]);
+    }
+
 
     //TODO : apply algo
 
