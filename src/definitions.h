@@ -14,6 +14,9 @@
 #define NUM_CHANNELS 2
 #define SAMPLING_FREQ 200
 
+#define byte char
+
+
 //TEXT COLOR
 #define RESET  "\x1B[0m"
 #define RED  "\x1B[31m"

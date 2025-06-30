@@ -24,7 +24,7 @@ int main(void){
 
 
     //INIT UART
-
+    initUART();
 
     //INIT BUFFERS
 
