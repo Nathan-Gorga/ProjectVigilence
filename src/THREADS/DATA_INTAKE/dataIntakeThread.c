@@ -46,27 +46,35 @@ void * dataIntakeThread(Node* head){
         const size_t size = (int)(SAMPLING_FREQ * SIGNAL_DURATION);
 
 
-        float * signal_channel1 = (float*)calloc(size, sizeof(float));
-        float * signal_channel2 = (float*)calloc(size, sizeof(float));
-    
+        float *signal_channels[NUM_CHANNELS];
+        for(int i = 0; i < NUM_CHANNELS; i++){
+            signal_channels[i] = (float*)calloc(size, sizeof(float));
+        }
+
+
         PRINTF_DEBUG
 
         //RECEIVE DATA FROM OPENBCI
-        //FIXME : make it work for any number of channels
-        mockSignal(signal_channel1, size, 1.0f, 10.0f);    
-        mockSignal(signal_channel2, size, 1.5f, 15.0f);    
+        for(int i = 0; i < NUM_CHANNELS; i++){
+            mockSignal(signal_channels[i], size, (float)(i+1), (float)(i+1)*10);
+        }
 
 
+       
         PRINTF_DEBUG
 
         float * signal = (float*)calloc(size * NUM_CHANNELS, sizeof(float));
 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < NUM_CHANNELS; j++){
-                signal[(i * NUM_CHANNELS) + j] = j == 0 ? signal_channel1[i] : signal_channel2[i];
+                signal[(i * NUM_CHANNELS) + j] = signal_channels[j][i];
+
             }
         }
 
+        for(int i = 0; i < NUM_CHANNELS; i++){
+            free(signal_channels[i]);
+        }
         PRINTF_DEBUG
 
         Node * event_node = initNode();

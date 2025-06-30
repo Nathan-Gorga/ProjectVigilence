@@ -35,7 +35,7 @@ void * dataProcessingThread(Node * head){
     
     PRINTF_DEBUG
     
-    // TODO : get the address of the first node 
+    
 
     int * indexes = (int*)malloc(NUM_CHANNELS * sizeof(int));
     PRINTF_DEBUG
@@ -55,8 +55,7 @@ void * dataProcessingThread(Node * head){
     //FIXME : make it work for any number of channel
     const int start = indexes[0];
     const int stop = indexes[1];
-    printf(""TAB"start = %d\n",start);
-    printf(""TAB"stop = %d\n",stop);
+    
     PRINTF_DEBUG
 
     free(indexes);
@@ -97,7 +96,7 @@ void * dataProcessingThread(Node * head){
     float * channel1 = (float*)calloc(channelSize, sizeof(float));
     float * channel2 = (float*)calloc(channelSize, sizeof(float));
     
-    for(int i = 0; i < channelSize; i++){//FIXME : only prints 0.0
+    for(int i = 0; i < channelSize; i++){
         channel1[i] = eventSignal[i * NUM_CHANNELS];
         channel2[i] = eventSignal[i * NUM_CHANNELS + 1];
     }
@@ -105,10 +104,10 @@ void * dataProcessingThread(Node * head){
     
     free(eventSignal);
     
-    for(int i = 0; i < channelSize; i++){
-        printf("Channel 1 : %f\n", channel1[i]);
-        printf("Channel 2 : %f\n", channel2[i]);
-    }
+    // for(int i = 0; i < channelSize; i++){
+    //     printf("Channel 1 : %f\n", channel1[i]);
+    //     printf("Channel 2 : %f\n", channel2[i]);
+    // }
     PRINTF_DEBUG
     
     free(channel1);
