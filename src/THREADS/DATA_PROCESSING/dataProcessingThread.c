@@ -55,6 +55,8 @@ void * dataProcessingThread(Node * head){
     //FIXME : make it work for any number of channel
     const int start = indexes[0];
     const int stop = indexes[1];
+    printf(""TAB"start = %d\n",start);
+    printf(""TAB"stop = %d\n",stop);
     PRINTF_DEBUG
 
     free(indexes);
@@ -70,7 +72,7 @@ void * dataProcessingThread(Node * head){
     PRINTF_DEBUG
 
     if(it_is_a_loop){
-        
+
         for(int i = 0; i < firstSize; i++){
             eventSignal[i] = event_ring_buffer->buffer[start + i];
         }
@@ -80,6 +82,8 @@ void * dataProcessingThread(Node * head){
         }
 
     } else {
+
+
         for(int i = 0; i < size; i++){
             eventSignal[i] = event_ring_buffer->buffer[start + i];
         }
@@ -101,10 +105,10 @@ void * dataProcessingThread(Node * head){
     
     free(eventSignal);
     
-    for(int i = 0; i < channelSize; i++){
-        printf("Channel 1 : %f\n", channel1[i]);
-        printf("Channel 2 : %f\n", channel2[i]);
-    }
+    // for(int i = 0; i < channelSize; i++){
+    //     printf("Channel 1 : %f\n", channel1[i]);
+    //     printf("Channel 2 : %f\n", channel2[i]);
+    // }
     PRINTF_DEBUG
     
     free(channel1);

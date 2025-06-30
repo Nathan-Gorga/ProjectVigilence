@@ -45,6 +45,7 @@ void * dataIntakeThread(Node* head){
         //SEND START STREAM SIGNAL TO OPENBCI
         const size_t size = (int)(SAMPLING_FREQ * SIGNAL_DURATION);
 
+
         float * signal_channel1 = (float*)calloc(size, sizeof(float));
         float * signal_channel2 = (float*)calloc(size, sizeof(float));
     
@@ -52,8 +53,9 @@ void * dataIntakeThread(Node* head){
 
         //RECEIVE DATA FROM OPENBCI
         //FIXME : make it work for any number of channels
-        mockSignal(signal_channel1, size, 1, 10);    
-        mockSignal(signal_channel2, size, 1.5, 15);    
+        mockSignal(signal_channel1, size, 1.0f, 10.0f);    
+        mockSignal(signal_channel2, size, 1.5f, 15.0f);    
+
 
         PRINTF_DEBUG
 
@@ -62,6 +64,7 @@ void * dataIntakeThread(Node* head){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < NUM_CHANNELS; j++){
                 signal[(j * NUM_CHANNELS) + i] = j == 0 ? signal_channel1[i] : signal_channel2[i];
+                // printf(""TAB"signal[%d] = %f\n", (j * NUM_CHANNELS) + i, signal[(j * NUM_CHANNELS) + i]);
             }
         }
 
