@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <pthread.h>
-
+#include <time.h>
 
 #define NUM_CHANNELS 2
 #define SAMPLING_FREQ 200

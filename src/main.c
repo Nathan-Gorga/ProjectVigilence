@@ -17,6 +17,9 @@ Ring_Buffer * event_ring_buffer;
 
 
 int main(void){
+
+    srand(time(NULL));
+
     
     printf(GREEN"Master Thread Launched\n"RESET);
 
