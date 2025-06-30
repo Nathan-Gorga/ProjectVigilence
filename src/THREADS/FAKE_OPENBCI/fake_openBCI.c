@@ -17,21 +17,31 @@ void * fakeOpenBCI(void){
     const int ten_sec_data = 10 * SAMPLING_FREQ;
     
     float signalBuffer[ten_sec_data] = {0.0f};
-    int count = 20;
+    int count = 200;
+
+    //TODO : wait for data intake signal to start
+
+
     while(count--){//TODO : add a better stop condition
-        printf(MAGENTA""TAB"%d\n",count);
+
         const int startEvent = randomStartEvent(ten_sec_data);
+
+        PRINTF_DEBUG
         sendUART(signalBuffer, startEvent);//FIXME : if no read is performed on the pipe, the thread freezes, handle this
+        PRINTF_DEBUG
 
         const size_t size = mockEvent(signalBuffer);
+
         PRINTF_DEBUG
         sendUART(signalBuffer, size);//FIXME : if no read is performed on the pipe, the thread freezes, handle this
         PRINTF_DEBUG
+
         for(int i = 0; i < size; i++){
             signalBuffer[i] = 0.0f;
         }
-        
-    }//TODO : the loop may be going toO fast for the intake thread, so add delays that mimic the baudrate
+
+        usleep(50);//115 200 baudrate
+    }
 
     return NULL;
 }

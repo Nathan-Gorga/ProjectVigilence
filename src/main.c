@@ -17,7 +17,7 @@ Ring_Buffer * event_ring_buffer;
 
 
 
-int main(void){
+int main(void){// TODO : modifier le rapport pour pas que ça soit arduino et envoyer au prof
 
     srand(time(NULL));
 
@@ -103,6 +103,7 @@ int main(void){
     printf(GREEN"Waiting for OpenBCI thread\n"RESET);
 
     pthread_join(fakeOpenBCIThread, NULL);
+    printf(GREEN"OpenBCI thread terminated\n"RESET);
 
     closeUART();
     return 0;
