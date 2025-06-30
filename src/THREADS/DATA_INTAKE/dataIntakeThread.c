@@ -63,8 +63,7 @@ void * dataIntakeThread(Node* head){
 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < NUM_CHANNELS; j++){
-                signal[(j * NUM_CHANNELS) + i] = j == 0 ? signal_channel1[i] : signal_channel2[i];
-                // printf(""TAB"signal[%d] = %f\n", (j * NUM_CHANNELS) + i, signal[(j * NUM_CHANNELS) + i]);
+                signal[(i * NUM_CHANNELS) + j] = j == 0 ? signal_channel1[i] : signal_channel2[i];
             }
         }
 

@@ -105,10 +105,10 @@ void * dataProcessingThread(Node * head){
     
     free(eventSignal);
     
-    // for(int i = 0; i < channelSize; i++){
-    //     printf("Channel 1 : %f\n", channel1[i]);
-    //     printf("Channel 2 : %f\n", channel2[i]);
-    // }
+    for(int i = 0; i < channelSize; i++){
+        printf("Channel 1 : %f\n", channel1[i]);
+        printf("Channel 2 : %f\n", channel2[i]);
+    }
     PRINTF_DEBUG
     
     free(channel1);
