@@ -42,7 +42,6 @@ void * dataIntakeThread(Node* head){
     
         PRINTF_DEBUG
 
-        //SEND START STREAM SIGNAL TO OPENBCI
         const size_t size = (int)(SAMPLING_FREQ * SIGNAL_DURATION);
 
 
@@ -86,7 +85,6 @@ void * dataIntakeThread(Node* head){
         addNodeToList(head, event_node);
 
         PRINTF_DEBUG
-
         
             //if there is data add it to internal ring
         
@@ -103,6 +101,8 @@ void * dataIntakeThread(Node* head){
         //INTERUPT : TERMINATE THREAD
         
         free(signal);
+        free(internalRingBuffer->buffer);
+        free(internalRingBuffer);
         PRINTF_DEBUG
         return NULL;
 }

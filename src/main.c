@@ -81,12 +81,10 @@ int main(void){
     pthread_join(dataProcessingThread, NULL);
     PRINTF_DEBUG
 
-    //send ACK signal once the thread responds
 
     //WAIT FOR DATA INTAKE TO RESPOND
     pthread_join(dataIntakeThread, NULL);
 
-    //send ACK signal once the thread responds
 
     PRINTF_DEBUG
 
