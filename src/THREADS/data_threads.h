@@ -3,6 +3,8 @@
 
 #include "../definitions.h"
 #include "../DATA_STRUCTURES/node.h"
+#include "../UART/UART.h"
+
 
 #define TAB "|\t"
 

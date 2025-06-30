@@ -4,3 +4,4 @@
 void * launchFakeOpenBCI(void * arg){
     return NULL;
 }
+
