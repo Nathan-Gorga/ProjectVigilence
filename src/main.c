@@ -5,8 +5,6 @@
 
 
 
-
-
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
@@ -102,7 +100,11 @@ int main(void){
     freeList(head);
     freeRingBuffer(event_ring_buffer);
     printf(GREEN"NO SEGFAULTS ?!\n"RESET);
+    printf(GREEN"Waiting for OpenBCI thread\n"RESET);
 
+    pthread_join(fakeOpenBCIThread, NULL);
+
+    closeUART();
     return 0;
 }
 
