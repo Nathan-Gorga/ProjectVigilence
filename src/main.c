@@ -2,7 +2,9 @@
 #include "THREADS/data_threads.h"
 #include "DATA_STRUCTURES/EVENT_RING_BUFFER/event_ring_buffer.h"
 #include "DATA_STRUCTURES/INTAKE_THREAD_BUFFER/intake_ring_buffer.h"
-#include "UART/UART.h"
+
+
+
 
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -16,11 +18,11 @@ const int THREADS_TO_WAIT = 2;
 Ring_Buffer * event_ring_buffer;
 
 
+
 int main(void){
 
     srand(time(NULL));
 
-    
     printf(GREEN"Master Thread Launched\n"RESET);
 
     //INIT BOARD
@@ -34,13 +36,12 @@ int main(void){
 
     //INIT BUFFERS
 
-    //defined in data_structures.h
+    
     event_ring_buffer = initEventRingBuffer();
     if(event_ring_buffer == NULL){
         perror(RED"ERROR : unable to create event ring buffer\n"RESET);
         return 1;
     }
-
 
     Node * head = initNode();
     if(head == NULL){
@@ -49,7 +50,11 @@ int main(void){
     }
 
     //HEARTBEAT TO OPENBCI
-
+    pthread_t fakeOpenBCIThread;
+    if(pthread_create(&fakeOpenBCIThread, NULL, launchFakeOpenBCI, NULL) != 0){
+        perror(RED"ERROR : unable to launch fake openbci\n"RESET);
+        return 1;
+    }
 
     //LAUNCH DATA PROCESSING THREAD
     PRINTF_DEBUG
@@ -88,10 +93,8 @@ int main(void){
     pthread_join(dataProcessingThread, NULL);
     PRINTF_DEBUG
 
-
     //WAIT FOR DATA INTAKE TO RESPOND
     pthread_join(dataIntakeThread, NULL);
-
 
     PRINTF_DEBUG
 

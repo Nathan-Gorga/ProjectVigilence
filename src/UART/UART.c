@@ -1,5 +1,7 @@
 #include "UART.h"
 
+int UART_fd[2];
+
 int initUART(void){
     return pipe(UART_fd);
 }
@@ -11,7 +13,7 @@ void closeUART(void){
 }
 
 
-int sendUART(const byte const * data, const size_t size){
+int sendUART(const float * data, const size_t size){
 
     #ifdef ASSERT_MODE
 
@@ -21,10 +23,10 @@ int sendUART(const byte const * data, const size_t size){
 
     #endif
 
-    return write(UART_fd[UART_TX], data, sizeof(byte) * size);
+    return write(UART_fd[UART_TX], data, sizeof(float) * size);
 }
 
-int getUART(const byte * data, const size_t size){
+int getUART(float * data, const size_t size){
     
     #ifdef ASSERT_MODE
 
@@ -32,6 +34,6 @@ int getUART(const byte * data, const size_t size){
 
     #endif
 
-    return read(UART_fd[UART_RX], data, sizeof(byte) * size);
+    return read(UART_fd[UART_RX], data, sizeof(float) * size);
 }
 

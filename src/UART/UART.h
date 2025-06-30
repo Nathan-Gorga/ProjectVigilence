@@ -10,15 +10,16 @@
 #define UART_TX 1
 #define UART_RX 0
 
-int UART_fd[2];
+
+extern int UART_fd[2];
 
 int initUART(void);
 
 void closeUART(void);
 
-int sendUART(const byte const * data, const size_t size);
+int sendUART(const float * data, const size_t size);
 
-int getUART(const byte * data, const size_t size);
+int getUART(float * data, const size_t size);
 
 #endif
 

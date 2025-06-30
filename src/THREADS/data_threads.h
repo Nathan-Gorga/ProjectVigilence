@@ -26,5 +26,8 @@ void * launchFakeOpenBCI(void * arg);
 void * dataIntakeThread(Node* head);
 
 void * dataProcessingThread(Node * head);
+
+void * fakeOpenBCI(void);
+
 #endif
 
