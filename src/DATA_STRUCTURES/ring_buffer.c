@@ -78,6 +78,7 @@ int takeEventFromRingBuffer(Node * head, int * indexes){
     if(head->next == NULL) return 1;//buffer empty
     PRINTF_DEBUG
 
+
     Node *eventNode = head->next;
     PRINTF_DEBUG
     

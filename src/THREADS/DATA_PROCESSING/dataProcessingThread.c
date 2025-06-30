@@ -45,10 +45,10 @@ void * dataProcessingThread(Node * head){
 
         ret = takeEventFromRingBuffer(head, indexes);
 
+
     }while(ret == 1);
     PRINTF_DEBUG
 
-    printNodeList(head);
     PRINTF_DEBUG
 
 
