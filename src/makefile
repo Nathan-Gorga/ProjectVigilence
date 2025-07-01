@@ -4,7 +4,7 @@ CFLAGS=#-Wall -Wextra -Werror -pedantic
 all: main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o mock_signal.o uart.o fake_openBCI.o
 	$(CC) $(CFLAGS) main.o intakethread.o procthread.o ring_buffer.o event_address_list.o event_ring_buffer.o intake_ring_buffer.o mock_signal.o uart.o fake_openBCI.o -lm -o ProjectVigilence
 	make clean 
-	clear
+	# clear
 	./ProjectVigilence
 
 main.o: main.c

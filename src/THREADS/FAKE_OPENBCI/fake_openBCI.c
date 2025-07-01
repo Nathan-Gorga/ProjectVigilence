@@ -14,9 +14,9 @@ void * fakeOpenBCI(void){
     
     printf(MAGENTA""TAB"Launched Fake openBCI successfully!\n"RESET);
 
-    const int ten_sec_data = 10 * SAMPLING_FREQ;
+    #define SIGNAL_BUF_SIZE 20
     
-    float signalBuffer[ten_sec_data] = {0.0f};
+    float signalBuffer[SIGNAL_BUF_SIZE] = {0.0f};
     int count = 200;
 
     //TODO : wait for data intake signal to start
@@ -24,7 +24,7 @@ void * fakeOpenBCI(void){
 
     while(count--){//TODO : add a better stop condition
 
-        const int startEvent = randomStartEvent(ten_sec_data);
+        const int startEvent = randomStartEvent(SIGNAL_BUF_SIZE)+1;
 
         PRINTF_DEBUG
         sendUART(signalBuffer, startEvent);//FIXME : if no read is performed on the pipe, the thread freezes, handle this
